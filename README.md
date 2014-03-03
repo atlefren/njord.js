@@ -62,4 +62,68 @@ The proposed library is to be released under the MIT-lisence.
 
 
 
+API
+---
+
+###Coordinates
+Is just a Pojo with: x and y (and optionally z):
+    
+    var coord = {x: 1, y: 1, z: 1};
+
+####Bounds: 
+A pojo with top, left, right, bottom:
+    
+    var bounds = {top: 1, left: 1, right: 2, bottom: 2};
+
+###Geometries
+
+####Base features:
+
+*Creation*:
+
+    //from coord
+    var geom1 = new N.Point(coord);
+    
+    //from wkt
+    var geom2 = new N.Point().fromWKT(wktString);
+    
+    //from GeoJSON
+    var geom3 = new N.Point().fromGeoJSON(geoJson);
+
+*Basic operations*: 
+  
+    geom.area();
+    geom.length();
+    geom.bounds();
+    geom.type(); //gets the type
+    geom.distance(geom2);
+    geom.repr(); //reperesentative point
+
+####Primitives
+
+*Point*
+    
+    new N.Point({x: 1, y: 1});
+
+*LineString*
+  
+    new N.LineString([{x: 1, y: 1}, {x: 2, y: 2}]);
+
+*LinearRing*
+  
+    new N.LinearRing([{x: 1, y: 1}, {x: 2, y: 2}, {x: 3, y: 3}]);
+
+*Polygon*
+  
+    new N.Polygon([{x: 1, y: 1}, {x: 2, y: 2}, {x: 3, y: 3}], [[]]);
+
+
+####Collections
+
+*MultiPoint*
+
+*MultiLineString*
+
+*MultiPolygon*
+
 
