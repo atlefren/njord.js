@@ -73,7 +73,7 @@ Is just a Pojo with: x and y (and optionally z):
 ####Bounds: 
 A pojo with top, left, right, bottom:
     
-    var bounds = {top: 1, left: 1, right: 2, bottom: 2};
+    var bounds = {left: 1, top: 1, right: 2, bottom: 2};
 
 ###Geometries
 
