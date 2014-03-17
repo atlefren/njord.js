@@ -29,11 +29,10 @@ var N = this.N || {};
 
         distance: function (other) {
             if (other.type() === 'Point') {
-                var x0 = this.x;
-                var y0 = this.y;
-                var x1 = other.x;
-                var y1 = other.y;
-                return Math.sqrt(Math.pow(x0 - x1, 2) + Math.pow(y0 - y1, 2));
+                return ns.distance(this, other);
+            }
+            if (other.type() === 'LineString') {
+                return other.distance(this);
             }
         }
     });

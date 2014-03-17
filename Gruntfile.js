@@ -8,8 +8,11 @@ module.exports = function(grunt) {
             },
             dist: {
                 src: [
-                    'src/first.js',
-                    'src/last.js'
+                    'src/class_system.js',
+                    'src/Calculations.js',
+                    'src/Geometry.js',
+                    'src/Point.js',
+                    'src/LineString.js'
                 ],
                 dest: 'dist/<%= pkg.name %>.js'
             }

@@ -9,6 +9,7 @@ config['Njord Browser tests'] = {
     ],
     sources: [
         'src/class_system.js',
+        'src/Calculations.js',
         'src/Geometry.js',
         'src/Point.js',
         'src/LineString.js'

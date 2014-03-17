@@ -20,7 +20,6 @@
             var point1 = new N.Point({x: 1, y: 2});
             assert.equals(point1.x, 1);
             assert.equals(point1.y, 2);
-
         },
 
         'Should have length of zero': function () {
@@ -54,6 +53,15 @@
             var point1 = new N.Point({x: 1, y: 2});
             var point2 = new N.Point({x: 10, y: 20});
             assert.equals(point1.distance(point2), 20.12461179749811);
+        },
+
+        'should get distance to a LineString': function () {
+            var point = new N.Point({x: 10, y: 20});
+            var lineString = new N.LineString([
+                {x: 1, y: 2},
+                {x: 3, y: 4}
+            ]);
+            assert.equals(point.distance(lineString), 17.46424919657298);
         }
 
     });
