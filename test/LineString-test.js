@@ -6,7 +6,7 @@
 
     buster.testCase('LineString test', {
 
-        "N.Point should be defined": function () {
+        'N.LineString should be defined': function () {
 
             var lineString = new N.LineString([
                 {x: 1, y: 1},
@@ -14,7 +14,6 @@
             ]);
 
             assert(lineString);
-
         }
     });
 }());
