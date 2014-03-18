@@ -154,9 +154,9 @@
 
         'should throw error when just one point': function () {
             assert.exception(function () {
-                new N.LineString([
+                var l = new N.LineString([
                     {x: 1, y: 1}
-                ])
+                ]);
             });
         }
     });

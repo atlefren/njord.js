@@ -44,10 +44,10 @@
 
         'should throw error when less than 3 points': function () {
             assert.exception(function () {
-                new N.Polygon([
+                var p = new N.Polygon([
                     {x: 1, y: 1},
                     {x: 1, y: 2}
-                ])
+                ]);
             });
         }
     });
