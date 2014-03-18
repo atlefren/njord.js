@@ -49,6 +49,34 @@
                     {x: 1, y: 2}
                 ]);
             });
+        },
+
+        'should get bounds': function () {
+            var bounds = this.poly.bounds();
+            assert.equals(bounds.top, 2);
+            assert.equals(bounds.left, 1);
+            assert.equals(bounds.right, 2);
+            assert.equals(bounds.bottom, 1);
+        },
+
+        'should get representative point': function () {
+            var repPoint = this.poly.repr();
+            assert(repPoint instanceof N.Point);
+            assert.equals(repPoint.x, 1.5);
+            assert.equals(repPoint.y, 1.5);
+        },
+
+        'should get representative point again': function () {
+            var poly = new N.Polygon([
+                {x: 1, y: 1},
+                {x: -1, y: 1},
+                {x: -1, y: -1},
+                {x: 1, y: -1}
+            ]);
+            var repPoint = poly.repr();
+            assert(repPoint instanceof N.Point);
+            assert.equals(repPoint.x, 0);
+            assert.equals(repPoint.y, 0);
         }
     });
 }());

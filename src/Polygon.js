@@ -33,6 +33,14 @@ var N = this.N || {};
                     return sum;
                 }, 0) / 2
             );
+        },
+
+        repr: function () {
+            //TODO: does not work with "strange" polys
+            var bounds = this.bounds();
+            var x = bounds.left + (bounds.right - bounds.left) / 2;
+            var y = bounds.bottom + (bounds.top - bounds.bottom) / 2;
+            return new ns.Point({x: x, y: y});
         }
     });
 
