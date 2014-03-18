@@ -12,7 +12,8 @@ config['Njord Browser tests'] = {
         'src/Calculations.js',
         'src/Geometry.js',
         'src/Point.js',
-        'src/LineString.js'
+        'src/LineString.js',
+        'src/Polygon.js'
     ],
     tests: [
         'test/*-test.js'

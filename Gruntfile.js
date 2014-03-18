@@ -12,7 +12,8 @@ module.exports = function(grunt) {
                     'src/Calculations.js',
                     'src/Geometry.js',
                     'src/Point.js',
-                    'src/LineString.js'
+                    'src/LineString.js',
+                    'src/Polygon.js'
                 ],
                 dest: 'dist/<%= pkg.name %>.js'
             }

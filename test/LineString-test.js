@@ -150,6 +150,14 @@
                 {x: 4, y: 3}
             ]);
             assert.equals(line1.distance(line2), 0.7071067811865476);
+        },
+
+        'should throw error when just one point': function () {
+            assert.exception(function () {
+                new N.LineString([
+                    {x: 1, y: 1}
+                ])
+            });
         }
     });
 }());

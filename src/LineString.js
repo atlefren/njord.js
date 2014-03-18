@@ -35,6 +35,13 @@ var N = this.N || {};
 
         geom_type: 'LineString',
 
+        initialize: function (coords) {
+            if (coords.length < 2) {
+                throw new Error("LineString must have at least two points!");
+            }
+            this.coords = coords;
+        },
+
         length: function () {
             return _.reduce(this.coords, function (res, coord, index, arr) {
                 if (index < arr.length - 1) {
