@@ -24,6 +24,13 @@ var N = this.N || {};
         return segments;
     }
 
+    function distancePointToLine(point, line) {
+        var segments = getClosestSegments(point, line);
+        return _.min(_.map(segments, function (segment) {
+            return ns.distance.pointToSegment(point, segment);
+        }));
+    }
+
     ns.LineString = ns.Geometry.extend({
 
         geom_type: 'LineString',
@@ -56,9 +63,12 @@ var N = this.N || {};
 
         distance: function (other) {
             if (other.type() === 'Point') {
-                var segments = getClosestSegments(other, this.coords);
-                return _.min(_.map(segments, function (segment) {
-                    return ns.distance.pointToSegment(other, segment);
+                return distancePointToLine(other, this.coords);
+            }
+
+            if (other.type() === 'LineString') {
+                return _.min(_.map(this.coords, function (point) {
+                    return distancePointToLine(point, other.coords);
                 }));
             }
         }

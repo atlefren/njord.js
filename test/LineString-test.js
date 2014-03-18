@@ -120,8 +120,36 @@
             assert.equals(line.distance(point), 0);
         },
 
-        '//Should get distance to  another linestring': function () {
-            //TODO
+        'Should get distance to another linestring': function () {
+            var line1 = new N.LineString([
+                {x: 1, y: 1},
+                {x: 4, y: 1}
+            ]);
+
+            var line2 = new N.LineString([
+                {x: 1, y: 4},
+                {x: 4, y: 4}
+            ]);
+
+            assert.equals(line1.distance(line2), 3);
+        },
+
+        'Should get more complex distance to another linestring': function () {
+            var line1 = new N.LineString([
+                {x: 1, y: 1},
+                {x: 3, y: 1},
+                {x: 4, y: 2},
+                {x: 5, y: 2},
+                {x: 6, y: 3}
+            ]);
+
+            var line2 = new N.LineString([
+                {x: 1, y: 3},
+                {x: 3, y: 3},
+                {x: 3, y: 2},
+                {x: 4, y: 3}
+            ]);
+            assert.equals(line1.distance(line2), 0.7071067811865476);
         }
     });
 }());
