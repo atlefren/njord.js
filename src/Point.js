@@ -29,7 +29,7 @@ var N = this.N || {};
 
         distance: function (other) {
             if (other.type() === 'Point') {
-                return ns.distance(this, other);
+                return ns.distance.pointToPoint(this, other);
             }
             if (other.type() === 'LineString') {
                 return other.distance(this);

@@ -69,7 +69,7 @@
 
         'Should get representative point': function () {
             var repPoint = this.line1.repr();
-            assert(repPoint instanceof N.Point)
+            assert(repPoint instanceof N.Point);
             assert.equals(repPoint.x, 1);
             assert.equals(repPoint.y, 2);
         },
@@ -77,6 +77,47 @@
         'Should get distance to  point': function () {
             var point1 = new N.Point({x: 10, y: 20});
             assert.equals(this.line1.distance(point1), 17.46424919657298);
+        },
+
+        'Should get distance to line not from vertex': function () {
+            var line = new N.LineString([
+                {x: 1, y: 1},
+                {x: 1, y: 5}
+            ]);
+            var point = new N.Point({x: 3, y: 3});
+            assert.equals(line.distance(point), 2);
+        },
+
+        'Should get distance to line with many segments not from vertex': function () {
+            var line = new N.LineString([
+                {x: 1, y: 1},
+                {x: 1, y: 4},
+                {x: 4, y: 4}
+            ]);
+            var point = new N.Point({x: 3, y: 3});
+            assert.equals(line.distance(point), 1);
+        },
+
+        'Should get distance to line with more segments not from vertex': function () {
+            var line = new N.LineString([
+                {x: 1, y: 1},
+                {x: 1, y: 4},
+                {x: 4, y: 4},
+                {x: 3, y: 4}
+            ]);
+            var point = new N.Point({x: 3, y: 3});
+            assert.equals(line.distance(point), 1);
+        },
+
+        'Should get distance of zero': function () {
+            var line = new N.LineString([
+                {x: 1, y: 1},
+                {x: 1, y: 4},
+                {x: 4, y: 4},
+                {x: 3, y: 4}
+            ]);
+            var point = new N.Point({x: 1, y: 2});
+            assert.equals(line.distance(point), 0);
         },
 
         '//Should get distance to  another linestring': function () {

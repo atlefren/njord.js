@@ -3,6 +3,27 @@ var N = this.N || {};
 (function (ns) {
     'use strict';
 
+    function getClosestSegments(point, coords) {
+        var vertexDistances = _.map(coords, function (coord) {
+            return ns.distance.pointToPoint(coord, point);
+        });
+        var closestVertex = _.indexOf(vertexDistances, _.min(vertexDistances));
+        var segments = [];
+        if (closestVertex + 1 < coords.length) {
+            segments.push([
+                coords[closestVertex],
+                coords[closestVertex + 1]
+            ]);
+        }
+        if (closestVertex - 1 >= 0) {
+            segments.push([
+                coords[closestVertex - 1],
+                coords[closestVertex]
+            ]);
+        }
+        return segments;
+    }
+
     ns.LineString = ns.Geometry.extend({
 
         geom_type: 'LineString',
@@ -10,7 +31,7 @@ var N = this.N || {};
         length: function () {
             return _.reduce(this.coords, function (res, coord, index, arr) {
                 if (index < arr.length - 1) {
-                    res += ns.distance(coord, arr[index + 1]);
+                    res += ns.distance.pointToPoint(coord, arr[index + 1]);
                 }
                 return res;
             }, 0);
@@ -27,7 +48,6 @@ var N = this.N || {};
                 right: _.max(xes),
                 bottom: _.min(ys)
             };
-
         },
 
         repr: function () {
@@ -36,10 +56,9 @@ var N = this.N || {};
 
         distance: function (other) {
             if (other.type() === 'Point') {
-
-                //TODO: this does only find distance from vertices
-                return _.min(_.map(this.coords, function (coord) {
-                    return ns.distance(coord, other);
+                var segments = getClosestSegments(other, this.coords);
+                return _.min(_.map(segments, function (segment) {
+                    return ns.distance.pointToSegment(other, segment);
                 }));
             }
         }
