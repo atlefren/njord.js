@@ -109,6 +109,18 @@
             assert.equals(line.distance(point), 1);
         },
 
+        'Should get distance to point from complex line': function () {
+            var line = new N.LineString([
+                {x: 1, y: 1},
+                {x: 8, y: 8},
+                {x: 2, y: 8},
+                {x: 3, y: 4},
+                {x: 1, y: 4}
+            ]);
+            var point = new N.Point({x: 3, y: 3});
+            assert.equals(line.distance(point), 0);
+        },
+
         'Should get distance of zero': function () {
             var line = new N.LineString([
                 {x: 1, y: 1},

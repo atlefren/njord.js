@@ -70,7 +70,19 @@ var N = this.N || {};
 
         distance: function (other) {
             if (other.type() === 'Point') {
-                return distancePointToLine(other, this.coords);
+                return _.chain(this.coords)
+                    .map(function (p1, index, coords) {
+                        if (index + 1 < coords.length) {
+                            return distancePointToLine(
+                                other,
+                                [p1, coords[index + 1]]
+                            );
+                        }
+                        return false;
+                    })
+                    .without(false)
+                    .min()
+                    .value();
             }
 
             if (other.type() === 'LineString') {
