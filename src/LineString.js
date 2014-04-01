@@ -31,6 +31,47 @@ var N = this.N || {};
         }));
     }
 
+    function segmentsCross(segment1, segment2) {
+
+        var x1 = segment1[0].x;
+        var y1 = segment1[0].y;
+
+        var x2 = segment1[1].x;
+        var y2 = segment1[1].y;
+
+        var x3 = segment2[0].x;
+        var y3 = segment2[0].y;
+
+        var x4 = segment2[1].x;
+        var y4 = segment2[1].y;
+
+        var denominator = ((x1 - x2) * (y3 - y4)) - ((y1 - y2) * (x3 - x4));
+
+        if (denominator === 0) {
+            return false;
+        }
+        var numeratorX = (((x1 * y2) - (y1 * x2)) * (x3 - x4)) - ((x1 - x2) * ((x3 * y4) - (y3 * x4)));
+        var numeratorY = (((x1 * y2) - (y1 * x2)) * (y3 - y4)) - ((y1 - y2) * ((x3 * y4) - (y3 * x4)));
+
+        var x = numeratorX / denominator;
+        var y = numeratorY / denominator;
+
+        var dist = distancePointToLine({x: x, y: y}, segment1);
+        var dist2 = distancePointToLine({x: x, y: y}, segment2);
+        return (dist === 0 && dist2 === 0);
+    }
+
+    function lineCrossesSegment(line, segment) {
+        return _.find(line.coords, function (coord, index, arr) {
+            if (index < arr.length - 1) {
+                //res += ns.distance.pointToPoint(coord, arr[index + 1]);
+
+                return segmentsCross([coord, arr[index + 1]], segment);
+            }
+            return false;
+        });
+    }
+
     ns.LineString = ns.Geometry.extend({
 
         geom_type: 'LineString',
@@ -74,11 +115,33 @@ var N = this.N || {};
             }
 
             if (other.type() === 'LineString') {
+
+                if (this.crosses(other)) {
+                    return 0;
+                }
+
                 return _.min(_.map(this.coords, function (point) {
                     return distancePointToLine(point, other.coords);
                 }));
             }
+
+            return false;
+        },
+
+        crosses: function (other) {
+
+            if (other.type() !== 'LineString') {
+                throw new Error("Can only check crossing with other point");
+            }
+
+            return _.find(this.coords, function (coord, index, arr) {
+                if (index < arr.length - 1) {
+                    return lineCrossesSegment(other, [coord, arr[index + 1]]);
+                }
+                return false;
+            });
         }
+
     });
 
 }(N));

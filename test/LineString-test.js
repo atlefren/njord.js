@@ -158,6 +158,79 @@
                     {x: 1, y: 1}
                 ]);
             });
+        },
+
+        "Should not report that two paralell lines cross": function () {
+            var line1 = new N.LineString([
+                {x: 1, y: 1},
+                {x: 4, y: 1}
+            ]);
+
+            var line2 = new N.LineString([
+                {x: 1, y: 2},
+                {x: 4, y: 2}
+            ]);
+            refute(line1.crosses(line2));
+        },
+
+        "Should report that two crossing lines cross": function () {
+            var line1 = new N.LineString([
+                {x: 1, y: 1},
+                {x: 4, y: 1}
+            ]);
+
+            var line2 = new N.LineString([
+                {x: 2, y: 0},
+                {x: 2, y: 3}
+            ]);
+            assert(line1.crosses(line2));
+        },
+
+        "Should report that two complex crossing lines cross": function () {
+            var line1 = new N.LineString([
+                {x: 4, y: 1},
+                {x: 1, y: 1},
+                {x: 4, y: 1}
+            ]);
+
+            var line2 = new N.LineString([
+                {x: 0, y: 0},
+                {x: 2, y: 0},
+                {x: 2, y: 3}
+            ]);
+            assert(line1.crosses(line2));
+        },
+
+        'should throw error when checking if-non-line crosses': function () {
+            assert.exception(function (e) {
+                var l = new N.LineString([
+                    {x: 1, y: 1},
+                    {x: 4, y: 1}
+                ]);
+
+                l.crosses(new N.Point({x: 1, y: 2}));
+            });
+        },
+
+        "Should return distance 0 between crossing lines": function () {
+            var line1 = new N.LineString([
+                {x: 4, y: 1},
+                {x: 1, y: 1},
+                {x: 4, y: 1}
+            ]);
+
+            var line2 = new N.LineString([
+                {x: 0, y: 0},
+                {x: 2, y: 0},
+                {x: 2, y: 3}
+            ]);
+            assert.equals(line1.distance(line2), 0);
+        },
+
+        "should not report that these lines cross": function () {
+            var line1 = new N.LineString([{ x: 3, y: 3 }, { x: 3, y: 2 }]);
+            var line2 = new N.LineString([{ x: 4, y: 2 }, { x: 5, y: 2 }]);
+            refute(line1.crosses(line2));
         }
     });
 }());
