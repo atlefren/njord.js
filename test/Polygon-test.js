@@ -4,7 +4,7 @@
     var assert = assert || buster.assertions.assert;
     var refute = refute || buster.assertions.refute;
 
-    buster.testCase('LineString test', {
+    buster.testCase('Polygon test', {
 
         setUp: function () {
             this.poly = new N.Polygon([
@@ -77,6 +77,30 @@
             assert(repPoint instanceof N.Point);
             assert.equals(repPoint.x, 0);
             assert.equals(repPoint.y, 0);
+        },
+
+        'should handle polygons with holes': function () {
+
+            var outer = [
+                {x: 1, y: 1},
+                {x: 1, y: 10},
+                {x: 10, y: 10},
+                {x: 10, y: 1}
+            ];
+
+            var ring1 = [
+                {x: 2, y: 2},
+                {x: 2, y: 3},
+                {x: 3, y: 3},
+                {x: 3, y: 2}
+            ];
+
+            var poly = new N.Polygon(outer, [ring1]);
+            assert.equals(poly.coords.length, 5);
+            assert.equals(poly.holes.length, 1);
+            assert.equals(poly.holes[0].length, 5);
+
+            assert.equals(poly.area(), 80);
         }
     });
 }());

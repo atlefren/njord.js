@@ -175,16 +175,24 @@ var N = this.N || {};
             });
         },
 
-        geoJSONCoords: function () {
-            return _.map(this.coords, function (coord) {
+        ringAsGeoJSONCoords: function (ring) {
+            return _.map(ring, function (coord) {
                 return [coord.x, coord.y];
             });
         },
 
-        getWktCoordString: function () {
-            return _.map(this.coords, function (coord) {
+        ringAsWktCoordString: function (ring) {
+            return _.map(ring, function (coord) {
                 return coord.x + ' ' + coord.y;
             }).join(', ');
+        },
+
+        geoJSONCoords: function () {
+            return this.ringAsGeoJSONCoords(this.coords);
+        },
+
+        getWktCoordString: function () {
+            return this.ringAsWktCoordString(this.coords);
         }
 
     });

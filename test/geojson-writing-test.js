@@ -44,6 +44,32 @@
 
             var poly = new N.Polygon(geojson);
             assert.equals(poly.json(), geojson);
+        },
+
+        'can read and write a geoJSON Polygon with hole': function () {
+
+            var geojson = {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [1, 1],
+                        [1, 10],
+                        [10, 10],
+                        [10, 1],
+                        [1, 1]
+                    ],
+                    [
+                        [2, 2],
+                        [2, 3],
+                        [3, 3],
+                        [3, 2],
+                        [2, 2]
+                    ]
+                ]
+            };
+
+            var poly = new N.Polygon(geojson);
+            assert.equals(poly.json(), geojson);
         }
 
     });

@@ -22,6 +22,12 @@
             var wkt = 'POLYGON ((1.1 1.1, 1.1 2.1, 2.1 2.1, 2.1 1.1, 1.1 1.1))';
             var poly = new N.Polygon(wkt);
             assert.equals(poly.wkt(), wkt);
+        },
+
+        'should be able to write a polygon with holeto wkt': function () {
+            var wkt = 'POLYGON ((1.1 1.1, 10.1 1.1, 10.1 10.1, 1.1 10.1, 1.1 1.1), (2.1 2.1, 3.1 2.1, 3.1 3.1, 2.1 3.1, 2.1 2.1))';
+            var poly = new N.Polygon(wkt);
+            assert.equals(poly.wkt(), wkt);
         }
     });
 }());

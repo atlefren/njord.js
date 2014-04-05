@@ -32,7 +32,7 @@ var N = this.N || {};
                 this.initialize(mapGeoJSONCoords(data.coordinates));
             } else if (data.type === "Polygon") {
                 var rings = _.map(data.coordinates, mapGeoJSONCoords);
-                this.initialize.apply(this, rings);
+                this.initialize(rings[0], _.rest(rings));
             }
         },
 
