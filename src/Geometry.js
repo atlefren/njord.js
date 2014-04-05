@@ -78,6 +78,16 @@ var N = this.N || {};
             };
         },
 
+        wkt: function () {
+            return _.template(
+                '<%=type %> (<%= coords %>)',
+                {
+                    type: this.geom_type.toUpperCase(),
+                    coords: this.getWktCoordString()
+                }
+            );
+        },
+
         geoJSONCoords: function () {
             //always overridden
         }

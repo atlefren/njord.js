@@ -58,6 +58,10 @@ var N = this.N || {};
 
         geoJSONCoords: function () {
             return [ns.LineString.prototype.geoJSONCoords.apply(this, arguments)];
+        },
+
+        getWktCoordString: function () {
+            return '(' + ns.LineString.prototype.getWktCoordString.apply(this, arguments) + ')';
         }
     });
 

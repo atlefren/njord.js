@@ -4,7 +4,7 @@
     var assert = assert || buster.assertions.assert;
     var refute = refute || buster.assertions.refute;
 
-    buster.testCase('GeoJSON parse test', {
+    buster.testCase('WKT parse test', {
 
         'should be able to parse WKT point': function () {
             var wkt = 'POINT (1.0 2.0)';

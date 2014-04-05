@@ -50,6 +50,10 @@ var N = this.N || {};
 
         geoJSONCoords: function () {
             return [this.x, this.y];
+        },
+
+        getWktCoordString: function () {
+            return _.template('<%= x %> <%= y %>', this.coords);
         }
     });
 
