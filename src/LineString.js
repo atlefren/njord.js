@@ -159,6 +159,12 @@ var N = this.N || {};
                 }
                 return false;
             });
+        },
+
+        geoJSONCoords: function () {
+            return _.map(this.coords, function (coord) {
+                return [coord.x, coord.y];
+            });
         }
 
     });

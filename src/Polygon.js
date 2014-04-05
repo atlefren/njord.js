@@ -44,6 +44,10 @@ var N = this.N || {};
             var x = bounds.left + (bounds.right - bounds.left) / 2;
             var y = bounds.bottom + (bounds.top - bounds.bottom) / 2;
             return new ns.Point({x: x, y: y});
+        },
+
+        geoJSONCoords: function () {
+            return [ns.LineString.prototype.geoJSONCoords.apply(this, arguments)];
         }
     });
 

@@ -41,7 +41,6 @@
                 "type": "Point",
                 "coordinates": [1, 2]
             };
-
             var point = new N.Geometry(geojson);
             assert.equals(point.type(), 'Point');
             assert(point instanceof N.Point);
@@ -137,7 +136,5 @@
             assert.equals(bounds.right, 2);
             assert.equals(bounds.bottom, 1);
         }
-
-
     });
 }());

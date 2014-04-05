@@ -54,6 +54,17 @@ var N = this.N || {};
 
         distance: function (other) {
             //always overridden
+        },
+
+        json: function () {
+            return {
+                type: this.geom_type,
+                coordinates: this.geoJSONCoords()
+            };
+        },
+
+        geoJSONCoords: function () {
+            //always overridden
         }
 
     });

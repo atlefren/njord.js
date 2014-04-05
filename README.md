@@ -98,6 +98,7 @@ A pojo with top, left, right, bottom:
     geom.type(); //gets the type
     geom.distance(geom2);
     geom.repr(); //reperesentative point
+    geom.json(): //returns a GeoJSON geometry object
 
 ####Primitives
 

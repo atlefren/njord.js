@@ -37,6 +37,10 @@ var N = this.N || {};
             if (other.type() === 'LineString') {
                 return other.distance(this);
             }
+        },
+
+        geoJSONCoords: function () {
+            return [this.x, this.y];
         }
     });
 
