@@ -243,6 +243,23 @@
             var line1 = new N.LineString([{ x: 3, y: 3 }, { x: 3, y: 2 }]);
             var line2 = new N.LineString([{ x: 4, y: 2 }, { x: 5, y: 2 }]);
             refute(line1.crosses(line2));
+        },
+
+        'Should get even more complex distance to another linestring': function () {
+            var line1 = new N.LineString([
+                {x: 1, y: 1},
+                {x: 8, y: 8},
+                {x: 2, y: 8},
+                {x: 3, y: 4},
+                {x: 1, y: 4}
+            ]);
+
+            var line2 = new N.LineString([
+                {x: 2, y: 1},
+                {x: 2, y: 3},
+                {x: 5, y: 3}
+            ]);
+            assert.equals(line1.distance(line2), 0);
         }
     });
 }());
