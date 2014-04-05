@@ -11,16 +11,19 @@ var N = this.N || {};
         geom_type: 'Polygon',
 
         initialize: function (coords) {
+            if (_.isArray(coords)) {
+                if (!coordsEquals(_.first(coords), _.last(coords))) {
+                    coords.push(_.clone(_.first(coords)));
+                }
 
-            if (!coordsEquals(_.first(coords), _.last(coords))) {
-                coords.push(_.clone(_.first(coords)));
+                if (coords.length < 3) {
+                    throw new Error("Polygon must have at least 3 points");
+                }
+
+                this.coords = coords;
+            } else {
+                ns.Geometry.prototype.initialize.apply(this, arguments);
             }
-
-            if (coords.length < 3) {
-                throw new Error("Polygon must have at least 3 points");
-            }
-
-            this.coords = coords;
         },
 
         area: function () {

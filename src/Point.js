@@ -8,10 +8,13 @@ var N = this.N || {};
         geom_type: 'Point',
 
         initialize: function (coords) {
-            ns.Geometry.prototype.initialize.apply(this, arguments);
-
-            this.x = coords.x;
-            this.y = coords.y;
+            if (_.isObject(coords) && _.has(coords, "x") && _.has(coords, "y")) {
+                this.x = coords.x;
+                this.y = coords.y;
+                this.coords = coords;
+            } else {
+                ns.Geometry.prototype.initialize.apply(this, arguments);
+            }
         },
 
         bounds: function () {

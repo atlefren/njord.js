@@ -77,10 +77,17 @@ var N = this.N || {};
         geom_type: 'LineString',
 
         initialize: function (coords) {
-            if (coords.length < 2) {
-                throw new Error("LineString must have at least two points!");
+            if (_.isArray(coords)) {
+
+                if (coords.length < 2) {
+                    throw new Error(
+                        "LineString must have at least two points!"
+                    );
+                }
+                this.coords = coords;
+            } else {
+                ns.Geometry.prototype.initialize.apply(this, arguments);
             }
-            this.coords = coords;
         },
 
         length: function () {
