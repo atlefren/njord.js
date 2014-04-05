@@ -15,7 +15,11 @@ var N = this.N || {};
             if (_.isObject(data)) {
                 this.parseGeoJson(data);
             } else if (_.isString(data)) {
-                this.parseGeoJson(JSON.parse(data));
+                try {
+                    this.parseGeoJson(JSON.parse(data));
+                } catch (SyntaxError) {
+                    this.checkParseWkt(data);
+                }
             }
         },
         parseGeoJson: function (data) {
@@ -29,6 +33,17 @@ var N = this.N || {};
             } else if (data.type === "Polygon") {
                 var rings = _.map(data.coordinates, mapGeoJSONCoords);
                 this.initialize.apply(this, rings);
+            }
+        },
+
+        checkParseWkt: function (wkt) {
+            var type = wkt.split(/ (.+)?/)[0];
+            if (type === this.geom_type.toUpperCase()) {
+                var substring = wkt.substring(
+                    wkt.indexOf('(') + 1,
+                    wkt.lastIndexOf(')')
+                );
+                this.initFromWktSubstring(substring);
             }
         },
 

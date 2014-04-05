@@ -26,6 +26,16 @@ var N = this.N || {};
             }
         },
 
+        initFromWktSubstring: function (substring) {
+
+            substring = substring.substring(
+                substring.indexOf('(') + 1,
+                substring.lastIndexOf(')')
+            );
+
+            this.initialize(this.parseWktSubstring(substring));
+        },
+
         area: function () {
             return Math.abs(
                 _.reduce(this.coords, function (sum, p1, index, coords) {

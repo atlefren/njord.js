@@ -17,6 +17,15 @@ var N = this.N || {};
             }
         },
 
+        initFromWktSubstring: function (wkt_substring) {
+            var coords = wkt_substring.split(" ");
+
+            this.initialize({
+                x: parseFloat(coords[0]),
+                y: parseFloat(coords[1])
+            });
+        },
+
         bounds: function () {
             return {
                 left: this.x,

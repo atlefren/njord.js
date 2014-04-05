@@ -90,6 +90,20 @@ var N = this.N || {};
             }
         },
 
+        parseWktSubstring: function (substring) {
+            return _.map(substring.split(','), function (coords) {
+                coords = _.without(coords.split(' '), '');
+                return {
+                    x: parseFloat(coords[0]),
+                    y: parseFloat(coords[1])
+                };
+            });
+        },
+
+        initFromWktSubstring: function (substring) {
+            this.initialize(this.parseWktSubstring(substring));
+        },
+
         length: function () {
             return _.reduce(this.coords, function (res, coord, index, arr) {
                 if (index < arr.length - 1) {
