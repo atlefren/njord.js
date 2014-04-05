@@ -85,10 +85,10 @@ A pojo with top, left, right, bottom:
     var geom1 = new N.Point(coord);
     
     //from wkt
-    var geom2 = new N.Point().fromWKT(wktString);
+    var geom2 = new N.Point(wktString);
     
     //from GeoJSON
-    var geom3 = new N.Point().fromGeoJSON(geoJson);
+    var geom3 = new N.Point(geoJsonGeometry); //as string or object
 
 *Basic operations*: 
   
