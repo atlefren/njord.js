@@ -19,17 +19,14 @@ var N = this.N || {};
 
     }
 
-    //works only for clockwise polys..
     function areaOfRing(ring) {
-        return Math.abs(
-            _.reduce(ring, function (sum, p1, index, coords) {
-                if (index < coords.length - 1) {
-                    var p2 = coords[index + 1];
-                    return sum + (p1.x + p2.x) * (p2.y - p1.y);
-                }
-                return sum;
-            }, 0) / 2
-        );
+        return Math.abs(_.reduce(ring, function (sum, p1, index, coords) {
+            if (index < coords.length - 1) {
+                var p2 = coords[index + 1];
+                return sum + (((p1.y + p2.y) / 2) * (p2.x - p1.x));
+            }
+            return sum;
+        }, 0));
     }
 
     function parsePolyWkt(string) {
