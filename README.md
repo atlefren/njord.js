@@ -70,6 +70,8 @@ Is just a Pojo with: x and y (and optionally z):
     
     var coord = {x: 1, y: 1, z: 1};
 
+Note: all operations (such a length) are in 2d.
+
 ####Bounds: 
 A pojo with top, left, right, bottom:
     
@@ -95,10 +97,11 @@ A pojo with top, left, right, bottom:
     geom.area();
     geom.length();
     geom.bounds();
-    geom.type(); //gets the type
+    geom.type();            //gets the type
     geom.distance(geom2);
-    geom.repr(); //reperesentative point
-    geom.json(): //returns a GeoJSON geometry object
+    geom.repr();            //reperesentative point
+    geom.json();            //returns a GeoJSON geometry object
+    geom.wkt();             //returns a WKT-string
 
 ####Primitives
 
@@ -117,7 +120,6 @@ A pojo with top, left, right, bottom:
 *Polygon*
   
     new N.Polygon([{x: 1, y: 1}, {x: 2, y: 2}, {x: 3, y: 3}], [[]]);
-
 
 ####Collections
 
